@@ -1,5 +1,8 @@
-function buildplots(input) {
+//build function to create plots
 
+function buildplots(input) {
+//take data from json, map it to needed fields 
+//add filter for change on new input
     d3.json("samples.json").then((data) => {
 
     
@@ -12,7 +15,10 @@ function buildplots(input) {
     const name = subject.otu_labels
     const values = subject.sample_values
     
+    //use function to find top 10 
     var ystuff = otu.slice(0,10).map(otu=> `OTU ${otu}`).reverse()
+    
+    //build bar chart
     var bardata = [{
         y: ystuff,
         x: values.slice(0,10).reverse(),
@@ -22,8 +28,10 @@ function buildplots(input) {
     }
 ];
 
+
     Plotly.newPlot("bar", bardata)
     
+    //build bubble chart
     var bubbledata = [{
         x: otu,
         y: values,
@@ -39,12 +47,14 @@ function buildplots(input) {
     })
 };
 
+//build function to grab demographic data for table
 function buildmetadata(input) {
     d3.json("samples.json").then((data) => {
     const metadata = data.metadata;
     var fordemos = metadata.filter(data => data.id == input);
     var subject = fordemos[0]
     
+    //select sample metadata cha clear it. then populate with values for subject
     var panel = d3.select('#sample-metadata');
     panel.html("")
 
@@ -58,7 +68,7 @@ function buildmetadata(input) {
 
 
 
-
+//function to add the ids to the dropdown and assign the value
 function makeithappen() {
 
     var grabid = d3.select("#selDataset");
@@ -72,7 +82,7 @@ function makeithappen() {
             .text(number)
             .property("value" , number)
     })
-
+//build original plots
     var first =ids[0]
     buildplots(first)
     buildmetadata(first)
@@ -80,6 +90,7 @@ function makeithappen() {
 });
 }
 
+//function to change based on updated values
 function updated(value) {
     buildplots(value);
     buildmetadata(value);
