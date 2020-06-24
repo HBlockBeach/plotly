@@ -5,14 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bellybutton Biodiversity</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    
-    <div class="col-md-5">
+    <div class="jumbotron">
+        <h1 class="header">Welcome to Bellybutton Biodiversity</h1>
+        <p class="desc">Use the visualizations below to explore!</p>
+      </div>
+
+
+
+      <div class="col-md-2">
+        <div class="well">
+          <h2>Test Subject</h2>
+          <select id="selDataset" onchange="updated(this.value)"></select>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Demographic Info</h3>
+          </div>
+          <div id="sample-metadata" class="panel-body"></div>
+        </div>
+      </div>
+
+
+      
+    <div class="col-md-4">
         <div id="bar"></div>
     </div>
 
 
+    <div class="col-md-6">
+        <div id="bubble"></div>
+    </div>
+    
 
 
 
